@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FusionChartsModule} from 'angular-fusioncharts';
-import {GraphkModule} from '../graphk/graphk.module';
+import {GraphkModule} from '../graphk';
 
 @NgModule({
     declarations: [

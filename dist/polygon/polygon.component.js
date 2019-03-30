@@ -5,6 +5,9 @@ var PolygonGraphData = /** @class */ (function () {
     return PolygonGraphData;
 }());
 export { PolygonGraphData };
+// templateUrl: './polygon.component.html',
+// styleUrls: ['./polygon.component.scss']
+// template: '<canvas #canvas></canvas>'
 var PolygonComponent = /** @class */ (function () {
     function PolygonComponent() {
         this._padding = 5;
@@ -218,7 +221,7 @@ var PolygonComponent = /** @class */ (function () {
         { type: Component, args: [{
                     selector: 'graphk-polygon',
                     templateUrl: './polygon.component.html',
-                    styleUrls: ['./polygon.component.scss'],
+                    styleUrls: ['./polygon.component.scss']
                 },] },
     ];
     /** @nocollapse */

@@ -12,10 +12,12 @@ export class PolygonGraphData {
     // }
 }
 
+    // templateUrl: './polygon.component.html',
+    // styleUrls: ['./polygon.component.scss']
+    // template: '<canvas #canvas></canvas>'
 @Component({
     selector: 'graphk-polygon',
-    templateUrl: './polygon.component.html',
-    styleUrls: ['./polygon.component.scss'],
+    template: '<canvas #canvas></canvas>'
 })
 
 export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
