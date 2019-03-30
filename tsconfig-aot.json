@@ -1,0 +1,46 @@
+{
+	"compilerOptions": {
+		"baseUrl": "",
+		"declaration": true,
+		"stripInternal": true,
+		"experimentalDecorators": true,
+		"strictNullChecks": true,
+		"noImplicitAny": false,
+		"module": "es2015",
+		"moduleResolution": "node",
+		"paths": {
+			"@angular/core": [
+				"node_modules/@angular/core"
+			],
+			"@angular/common": [
+				"node_modules/@angular/common"
+			],
+			"rxjs/*": [
+				"node_modules/rxjs/*"
+			]
+		},
+		"rootDir": "src/graphk",
+		"outDir": "dist",
+		"sourceMap": true,
+		"inlineSources": true,
+		"target": "es5",
+		"skipLibCheck": true,
+		"lib": [
+			"es2017",
+			"es2016",
+			"es2015",
+			"es2015.core",
+			"es2015.collection",
+			"es5",
+			"es6",
+			"dom"
+		]
+	},
+	"files": [
+		"./src/graphk/index.ts"
+	],
+	"angularCompilerOptions": {
+		"strictMetadataEmit": true,
+		"genDir": ".tmp"
+	}
+}
