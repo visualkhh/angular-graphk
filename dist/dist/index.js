@@ -1,10 +1,9 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-var PolygonGraphData = /** @class */ (function () {
-    function PolygonGraphData() {
-    }
-    return PolygonGraphData;
-}());
-export { PolygonGraphData };
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng['angular-graphk'] = {}),global.ng.core));
+}(this, (function (exports,_angular_core) { 'use strict';
+
 // templateUrl: './polygon.component.html',
 // styleUrls: ['./polygon.component.scss']
 // template: '<canvas #canvas></canvas>'
@@ -219,7 +218,7 @@ var PolygonComponent = /** @class */ (function () {
         ctx.restore(); // 기존 드로잉 상태를 복구한다.
     };
     PolygonComponent.decorators = [
-        { type: Component, args: [{
+        { type: _angular_core.Component, args: [{
                     selector: 'graphk-polygon',
                     template: '<canvas #canvas></canvas>'
                 },] },
@@ -227,15 +226,33 @@ var PolygonComponent = /** @class */ (function () {
     /** @nocollapse */
     PolygonComponent.ctorParameters = function () { return []; };
     PolygonComponent.propDecorators = {
-        polygonLineStrokeStyle: [{ type: Input }],
-        polygonLength: [{ type: Input }],
-        padding: [{ type: Input }],
-        data: [{ type: Input }],
-        width: [{ type: Input }],
-        height: [{ type: Input }],
-        canvasElementRef: [{ type: ViewChild, args: ['canvas',] }]
+        polygonLineStrokeStyle: [{ type: _angular_core.Input }],
+        polygonLength: [{ type: _angular_core.Input }],
+        padding: [{ type: _angular_core.Input }],
+        data: [{ type: _angular_core.Input }],
+        width: [{ type: _angular_core.Input }],
+        height: [{ type: _angular_core.Input }],
+        canvasElementRef: [{ type: _angular_core.ViewChild, args: ['canvas',] }]
     };
     return PolygonComponent;
 }());
-export { PolygonComponent };
-//# sourceMappingURL=polygon.component.js.map
+
+// import { CommonModule } from '@angular/common';
+var GraphkModule = /** @class */ (function () {
+    function GraphkModule() {
+    }
+    GraphkModule.decorators = [
+        { type: _angular_core.NgModule, args: [{
+                    imports: [],
+                    declarations: [PolygonComponent],
+                    exports: [PolygonComponent]
+                },] },
+    ];
+    return GraphkModule;
+}());
+
+exports.GraphkModule = GraphkModule;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

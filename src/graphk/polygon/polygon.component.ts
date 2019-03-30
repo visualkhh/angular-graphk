@@ -15,6 +15,7 @@ export class PolygonGraphData {
     // templateUrl: './polygon.component.html',
     // styleUrls: ['./polygon.component.scss']
     // template: '<canvas #canvas></canvas>'
+    // 1.0.3
 @Component({
     selector: 'graphk-polygon',
     template: '<canvas #canvas></canvas>'
