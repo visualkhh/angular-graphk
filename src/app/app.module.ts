@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FusionChartsModule} from 'angular-fusioncharts';
 import {GraphkModule} from '../graphk';
 
 @NgModule({
@@ -11,7 +10,6 @@ import {GraphkModule} from '../graphk';
     ],
     imports: [
         BrowserModule,
-        FusionChartsModule,
         GraphkModule
 
     ],

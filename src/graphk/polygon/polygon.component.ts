@@ -1,6 +1,16 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
 
-export class PolygonGraphData {
+export class PolygonData {
     data: number[];
     max: number;
     // getMax(): number {
@@ -25,7 +35,7 @@ export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
     private _width: number;
     private _height: number;
     private _padding = 5;
-    private _data: PolygonGraphData;
+    private _data: PolygonData;
     private _polygonLength = 1;
     @Input()
     public polygonLineStrokeStyle = '#969696';
@@ -43,7 +53,7 @@ export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     @Input()
-    public set data(value: PolygonGraphData) {
+    public set data(value: PolygonData) {
         this._data = value;
         // this.reDraw();
     }
@@ -76,10 +86,11 @@ export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
         return this._height;
     }
 
-    public get data(): PolygonGraphData {
+    public get data(): PolygonData {
         return this._data;
     }
 
+    @Output()
     @ViewChild('canvas') public canvasElementRef: ElementRef;
 
     constructor() {
@@ -100,7 +111,7 @@ export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
         // console.log(event.target);
         const canvas = this.canvasElementRef.nativeElement as HTMLCanvasElement;
         const ctx = canvas.getContext('2d');
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         if (!this.data || !this.data.data || this.data.data.length < 3) {
             return;
@@ -140,7 +151,7 @@ export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
         // ctx.fill(); //경로 그리기 종료(채움)
     }
 
-    private polygonData(ctx: CanvasRenderingContext2D|any, x: number, y: number, data: PolygonGraphData, radius: number, startAngle: number) {
+    private polygonData(ctx: CanvasRenderingContext2D|any, x: number, y: number, data: PolygonData, radius: number, startAngle: number) {
         const sides = data.data.length;
         if (sides < 3) {
             return;
@@ -165,7 +176,7 @@ export class PolygonComponent implements OnInit, AfterViewInit, OnChanges {
         for (let i = 1; i < sides; i++) {// 면의수만큼루프를반복한다
             // 다음 꼭지점까지 선을 그린다.
             const setRedius = (radius * data.data[i]) / data.max;
-            console.log(setRedius);
+            // console.log(setRedius);
             const sx = setRedius * Math.cos(degree * i);
             const sy = setRedius * Math.sin(degree * i);
             ctx.lineTo(sx, sy);
