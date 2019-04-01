@@ -12,6 +12,14 @@ export class AppComponent {
     h = 270;
     gaugeData: GaugeStepData[];
     constructor() {
+        const a = new GaugeStepData(); a.fillStyle = '#00ff00';  a.title = '매우낮음'; a.safe = true;  a.checked = true;
+        const b = new GaugeStepData(); b.fillStyle = '#fffc5b';  b.title = '낮음'; b.safe = true;  b.checked = false;
+        const c = new GaugeStepData(); c.fillStyle = '#a0b6ff';  c.title = '적정'; c.safe = true;  c.checked = false;
+        const d = new GaugeStepData(); d.fillStyle = '#ff2c1b';  d.title = '좋음'; d.safe = false;  d.checked = false;
+        const e = new GaugeStepData(); e.fillStyle = '#7effc0';  e.title = '높음'; e.safe = false;  e.checked = false;
+        const f = new GaugeStepData(); f.fillStyle = '#c61dff';  f.title = '매우높음'; f.safe = false;  f.checked = false;
+        // this.gaugeData = [a, b, c, d, e, f]
+        this.gaugeData = [a, b, c]
     }
 
     @HostListener('window:resize', ['$event'])
@@ -21,12 +29,5 @@ export class AppComponent {
         this.h = this.h / 2 + 20;
         // this.canvasElementRef.nativeElement.dispatchEvent(new Event('resize'));
         // // this.canvaseRedraw(event);
-        const a = new GaugeStepData(); a.fillStyle = '#00ff00';  a.title = '매우낮음'; a.safe = true;  a.checked = false;
-        const b = new GaugeStepData(); b.fillStyle = '#fffc5b';  b.title = '낮음'; b.safe = false;  b.checked = true;
-        const c = new GaugeStepData(); c.fillStyle = '#a0b6ff';  c.title = '적정'; c.safe = true;  c.checked = false;
-        const d = new GaugeStepData(); d.fillStyle = '#ff2c1b';  d.title = '좋음'; d.safe = false;  d.checked = true;
-        const e = new GaugeStepData(); e.fillStyle = '#7effc0';  e.title = '높음'; e.safe = true;  e.checked = false;
-        const f = new GaugeStepData(); f.fillStyle = '#c61dff';  f.title = '매우높음'; f.safe = true;  f.checked = true;
-        this.gaugeData = [a, b, c, d, e, f]
     }
 }

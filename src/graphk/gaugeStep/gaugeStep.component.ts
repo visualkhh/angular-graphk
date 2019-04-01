@@ -16,7 +16,8 @@ export class GaugeStepData {
     safeFillStyle = 'rgba(71, 169, 203, 0.5)';
     title = '';
     checked = false;
-    titleStyle = '#c3c3c3';
+    // titleStyle = '#c3c3c3';
+    titleStyle = '#ffffff';
     fillStyle = '#fdd30e';
 }
 
@@ -27,7 +28,7 @@ export class GaugeStepData {
 @Component({
     selector: 'graphk-gaugeStep',
     template: '<canvas #canvas></canvas>',
-    styles: ['canvas {border: 1px solid black}']
+    // styles: ['canvas {border: 1px solid black}']
 })
 
 export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
@@ -57,8 +58,32 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         this.reDraw();
     }
 
+    // 퍼센트 계산법 공식과 간단한 예제입니다.
+    //
+    // 전체값에서 일부값은 몇 퍼센트? 계산법 공식
+    // 일부값 ÷ 전체값 X 100
+    // 예제) 300에서 105는 몇퍼센트?
+    // 답: 35%
+    //
+    //
+    // 전체값의 몇 퍼센트는 얼마? 계산법 공식
+    // 전체값 X 퍼센트 ÷ 100
+    // 예제) 300의 35퍼센트는 얼마?
+    // 답) 105
+    //
+    //
+    // 숫자를 몇 퍼센트 증가시키는 공식
+    // 숫자 X (1 + 퍼센트 ÷ 100)
+    // 예제) 1548을 66퍼센트 증가하면?
+    // 답) 2569.68
+    //
+    //
+    // 숫자를 몇 퍼센트 감소하는 공식
+    // 숫자 X (1 - 퍼센트 ÷ 100)
+    // 예제) 1548을 66퍼센트 감소하면?
+    // 답) 526.32
     private reDraw() {
-        // console.log(event.target);
+        // console.log('onDraw');
         const canvas = this.canvasElementRef.nativeElement as HTMLCanvasElement;
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -90,7 +115,11 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         // const end = this.angleRadian;
         // const end = Math.PI * 2 - 0.5;
         // ctx.arc(canvas.width / 2, canvas.height / 2, radius, Math.PI - end, end, true);
+
+        // 가이드라인
         ctx.save(); // 드로잉 상태를 저정한다.
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = '#c3c3c3';
         ctx.translate(centerX, canvas.height);
         ctx.rotate(Math.PI);
         ctx.beginPath();
@@ -101,95 +130,213 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         ctx.restore(); // 기존 드로잉 상태를 복구한다.
 
 
-
+        // 전체값의 몇 퍼센트는 얼마? 계산법 공식
+        // 전체값 X 퍼센트 ÷ 100
+        let applyRadius = (radius * 100) / 100;
         // safe zone
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
+            if (!data.safe) {
+                continue;
+            }
             ctx.save(); // 드로잉 상태를 저정한다.
             ctx.fillStyle = data.safeFillStyle;
+            ctx.lineWidth = 0.1;
+            ctx.strokeStyle = '#c3c3c3';
             ctx.translate(centerX, canvas.height);
             ctx.rotate(Math.PI + ((Math.PI / this.data.length) * i));
             ctx.beginPath();
             ctx.moveTo(0, 0);
-            ctx.arc(0, 0, radius, 0, Math.PI / this.data.length);
+            ctx.arc(0, 0, applyRadius, 0, Math.PI / this.data.length);
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
             ctx.restore(); // 기존 드로잉 상태를 복구한다.
         }
+
+        applyRadius = (radius * 95) / 100;
         // margin arc
         ctx.save(); // 드로잉 상태를 저정한다.
         ctx.fillStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#c3c3c3';
+        ctx.shadowColor = '#c3c3c3';
+        ctx.shadowBlur = 5;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 4;
         ctx.translate(centerX, canvas.height);
         ctx.rotate(Math.PI);
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.arc(0, 0, radius - 20, 0, Math.PI);
+        ctx.arc(0, 0, applyRadius, 0, Math.PI);
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
         ctx.restore(); // 기존 드로잉 상태를 복구한다.
 
 
+        applyRadius = (radius * 85) / 100;
         // none checked
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
             if (data.checked) {
                 continue;
             }
-            const color = 230 - (200 / this.data.length) * i;
+            const color = 230 - (150 / this.data.length) * i;
             ctx.save(); // 드로잉 상태를 저정한다.
             ctx.fillStyle = 'rgb(' + color + ', ' + color + ', ' + color + ')';
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#c3c3c3';
             ctx.translate(centerX, canvas.height);
             const rotate = Math.PI + ((Math.PI / this.data.length) * i);
             ctx.rotate(rotate);
             ctx.beginPath();
             ctx.moveTo(0, 0);
-            ctx.arc(0, 0, radius - 80, 0, Math.PI / this.data.length);
+            ctx.arc(0, 0, applyRadius, 0, Math.PI / this.data.length);
             ctx.closePath();
             ctx.fill();
-            ctx.stroke();
-
-            if (i === 0) {
-                ctx.rotate(-rotate) ;
-                ctx.fillStyle = data.titleStyle;
-                ctx.font = '20px Arial';
-                ctx.fillText('Hello World', -100, -150);
-            }
+            // ctx.stroke();
             ctx.restore(); // 기존 드로잉 상태를 복구한다.
         }
 
-        // checked
-        // for (let i = 0; i < this.data.length; i++) {
-        //     const data = this.data[i];
-        //     if (!data.checked) {
-        //         continue;
-        //     }
-        //     ctx.save(); // 드로잉 상태를 저정한다.
-        //     ctx.fillStyle = data.fillStyle;
-        //     ctx.translate(centerX, canvas.height);
-        //     ctx.rotate(Math.PI + ((Math.PI / this.data.length) * i));
-        //     ctx.beginPath();
-        //     ctx.moveTo(0, 0);
-        //     ctx.arc(0, 0, radius - 40, 0, Math.PI / this.data.length);
-        //     ctx.closePath();
-        //     ctx.fill();
-        //     ctx.stroke();
-        //     ctx.restore(); // 기존 드로잉 상태를 복구한다.
-        // }
 
+        applyRadius = (radius * 95) / 100;
+        // checked
+        for (let i = 0; i < this.data.length; i++) {
+            const data = this.data[i];
+            if (!data.checked) {
+                continue;
+            }
+            ctx.save(); // 드로잉 상태를 저정한다.
+            ctx.fillStyle = data.fillStyle;
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#c3c3c3';
+            ctx.shadowColor = '#666666';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 1;
+            ctx.translate(centerX, canvas.height);
+            ctx.rotate(Math.PI + ((Math.PI / this.data.length) * i));
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.arc(0, 0, applyRadius, 0, Math.PI / this.data.length);
+            ctx.closePath();
+            ctx.fill();
+            // ctx.stroke();
+            ctx.restore(); // 기존 드로잉 상태를 복구한다.
+        }
+
+
+        applyRadius = (radius * 60) / 100;
+
+
+        for (let i = 0; i < this.data.length; i++) {
+            const data = this.data[i];
+            ctx.save(); // 드로잉 상태를 저정한다.
+            ctx.fillStyle = data.titleStyle;
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#c3c3c3';
+            ctx.shadowColor = '#999999';
+            ctx.shadowBlur = 3;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 1;
+            // title
+            // ctx.font = '20px Arial';
+            // console.log((Math.PI / this.data.length));
+            // ctx.font = ((Math.PI / (this.data.length))  + (this.width / this.data.length)) + 'px Arial';
+            ctx.font = (((this.width / this.data.length)) * 20 / 100) + 'px Arial';
+            ctx.textAlign = 'center';
+            ctx.translate(centerX, canvas.height);
+
+            // ctx.font = ((this.width / this.data.length) - 100) + 'px Arial';
+            // const rotate = ((Math.PI / this.data.length) * i);
+            // let rotate = (Math.PI * 1.5) + ((Math.PI / this.data.length) * i) + ((Math.PI / this.data.length) * i) / 2;
+            const rotate = (-Math.PI / 2); // 초기각도셋팅
+            ctx.rotate(rotate);
+            ctx.rotate(((Math.PI / this.data.length) * i)); // 글자 초기각도 셋팅
+            ctx.rotate((Math.PI / this.data.length) / 2); // 글자 cneter 셋팅
+            // let rotate = (Math.PI * 1.5);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.strokeText(data.title, 0, -applyRadius)
+            ctx.fillText(data.title, 0, -applyRadius);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore(); // 기존 드로잉 상태를 복구한다.
+        }
+
+
+
+        applyRadius = (radius * 50) / 100;
+        // arrow
+        for (let i = 0; i < this.data.length; i++) {
+            const data = this.data[i];
+            if (!data.checked) {
+                continue;
+            }
+            ctx.save(); // 드로잉 상태를 저정한다.
+            ctx.fillStyle = '#ffffff';
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = '#ffffff';
+            ctx.shadowColor = '#c3c3c3';
+            ctx.shadowBlur = 5;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 4;
+            // ctx.font = '20px Arial';
+            // ctx.font = ((this.width / this.data.length) - 100) + 'px Arial';
+            console.log((Math.PI / this.data.length))
+            ctx.font = ((Math.PI / this.data.length) / 2 * (this.width / this.data.length)) + 'px Arial';
+            ctx.textAlign = 'center';
+
+            ctx.translate(centerX, canvas.height);
+            // const rotate = ((Math.PI / this.data.length) * i);
+            // let rotate = (Math.PI * 1.5) + ((Math.PI / this.data.length) * i) + ((Math.PI / this.data.length) * i) / 2;
+            // let rotate = (Math.PI * 1.5);
+            const rotate = (-Math.PI / 2); // 초기각도셋팅
+            ctx.rotate(rotate);
+            ctx.rotate(((Math.PI / this.data.length) * i)); // 글자 초기각도 셋팅
+            ctx.rotate((Math.PI / this.data.length) / 2); // 글자 cneter 셋팅
+            ctx.beginPath();
+            const scale = ((Math.PI / this.data.length) / 2 * (this.width / this.data.length));
+            ctx.moveTo(-scale, 0);
+            ctx.lineTo(0, -applyRadius);
+            ctx.lineTo(scale, 0);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore(); // 기존 드로잉 상태를 복구한다.
+        }
+
+
+
+
+
+
+
+        applyRadius = (radius * 40) / 100;
         // margin arc
-        // ctx.save(); // 드로잉 상태를 저정한다.
-        // ctx.fillStyle = '#ffffff';
-        // ctx.translate(centerX, canvas.height);
-        // ctx.rotate(Math.PI);
-        // ctx.beginPath();
-        // ctx.moveTo(0, 0);
-        // ctx.arc(0, 0, radius - 100, 0, Math.PI);
-        // ctx.closePath();
-        // ctx.fill();
-        // ctx.stroke();
-        // ctx.restore(); // 기존 드로잉 상태를 복구한다.
+        ctx.save(); // 드로잉 상태를 저정한다.
+        ctx.fillStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#ffffff';
+        ctx.shadowColor = '#c3c3c3';
+        ctx.shadowBlur = 5;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 4;
+        ctx.translate(centerX, canvas.height);
+        ctx.rotate(Math.PI);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, applyRadius, 0, Math.PI);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore(); // 기존 드로잉 상태를 복구한다.
+
+
+
+
 
         // const degree = (Math.PI * 2) / sides; // 각 면에 대한 각도를 계산한다.
         // ctx.save(); // 드로잉 상태를 저정한다.
