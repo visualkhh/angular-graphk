@@ -1,1 +1,0 @@
-{"version":3,"file":"gaugeStep.component.ngfactory.js","sourceRoot":"","sources":["../../src/graphk/gaugeStep/gaugeStep.component.ngfactory.ts","../../src/graphk/gaugeStep/gaugeStep.component.ts.GaugeStepComponent.html"],"names":[],"mappings":";;;;;;;;;;;oHCAA,kGAAgB","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n","<canvas #canvas></canvas>"]}

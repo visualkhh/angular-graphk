@@ -1,1 +1,0 @@
-{"version":3,"file":"polygon.component.ngfactory.js","sourceRoot":"","sources":["../../src/graphk/polygon/polygon.component.ngfactory.ts","../../src/graphk/polygon/polygon.component.ts.PolygonComponent.html"],"names":[],"mappings":";;;;;;;;;;;kHCAA,kGAAgB","sourcesContent":["import * as i0 from '@angular/core';\ni0.ComponentFactory;\n","<canvas #canvas></canvas>"]}
