@@ -1,5 +1,5 @@
 import { AfterViewInit, ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-export declare class PolygonGraphData {
+export declare class PolygonData {
     data: number[];
     max: number;
 }
@@ -13,7 +13,7 @@ export declare class PolygonComponent implements OnInit, AfterViewInit, OnChange
     polygonDataFillStyle: string;
     polygonLength: number;
     padding: number;
-    data: PolygonGraphData;
+    data: PolygonData;
     width: number;
     height: number;
     canvasElementRef: ElementRef;

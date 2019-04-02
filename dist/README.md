@@ -1,13 +1,6 @@
-hello graphK
-
-
-
-rollup
+npm install angular-graphk --save
 ---
-https://arnoldyoo.tistory.com/24
-
-
-npm 배포
----
-https://sanghaklee.tistory.com/34
-https://www.npmjs.com
+```
+<graphk-gaugeStep [width]="w" [height]="h" [data]="gaugeData"></graphk-gaugeStep>
+<graphk-polygon [width]="w" [height]="h" [data]="{max:11, data:[1,2,3,7, 11]}"  [polygonLength]="3" >
+```

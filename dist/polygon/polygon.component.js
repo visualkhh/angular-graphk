@@ -1,10 +1,10 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-var PolygonGraphData = /** @class */ (function () {
-    function PolygonGraphData() {
+import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
+var PolygonData = /** @class */ (function () {
+    function PolygonData() {
     }
-    return PolygonGraphData;
+    return PolygonData;
 }());
-export { PolygonGraphData };
+export { PolygonData };
 // templateUrl: './polygon.component.html',
 // styleUrls: ['./polygon.component.scss']
 // template: '<canvas #canvas></canvas>'
@@ -85,7 +85,7 @@ var PolygonComponent = /** @class */ (function () {
         // console.log(event.target);
         var canvas = this.canvasElementRef.nativeElement;
         var ctx = canvas.getContext('2d');
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         if (!this.data || !this.data.data || this.data.data.length < 3) {
             return;
         }
@@ -144,7 +144,7 @@ var PolygonComponent = /** @class */ (function () {
         for (var i = 1; i < sides; i++) { // 면의수만큼루프를반복한다
             // 다음 꼭지점까지 선을 그린다.
             var setRedius = (radius * data.data[i]) / data.max;
-            console.log(setRedius);
+            // console.log(setRedius);
             var sx = setRedius * Math.cos(degree * i);
             var sy = setRedius * Math.sin(degree * i);
             ctx.lineTo(sx, sy);
@@ -233,7 +233,7 @@ var PolygonComponent = /** @class */ (function () {
         data: [{ type: Input }],
         width: [{ type: Input }],
         height: [{ type: Input }],
-        canvasElementRef: [{ type: ViewChild, args: ['canvas',] }]
+        canvasElementRef: [{ type: Output }, { type: ViewChild, args: ['canvas',] }]
     };
     return PolygonComponent;
 }());
