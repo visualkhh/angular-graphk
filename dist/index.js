@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import { PolygonComponent } from './polygon/polygon.component';
-import { GaugeStepComponent } from "./gaugeStep/gaugeStep.component";
+import { GaugeStepComponent } from './gaugeStep/gaugeStep.component';
 var GraphkModule = /** @class */ (function () {
     function GraphkModule() {
     }

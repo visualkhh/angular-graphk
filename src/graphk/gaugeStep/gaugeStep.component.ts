@@ -10,16 +10,9 @@ import {
     ViewChild
 } from '@angular/core';
 import {timer} from 'rxjs/internal/observable/timer';
+import {GaugeStepData} from './GaugeStepData';
 
-export class GaugeStepData {
-    safe = false;
-    safeFillStyle = 'rgba(71, 169, 203, 0.5)';
-    title = '';
-    checked = false;
-    // titleStyle = '#c3c3c3';
-    titleStyle = '#ffffff';
-    fillStyle = '#fdd30e';
-}
+
 
     // templateUrl: './polygon.component.html',
     // styleUrls: ['./polygon.component.scss']
@@ -101,7 +94,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         const centerY = canvas.height / 2;
         // const startAngle = -Math.PI / 2;
         // const sides = this.data.data.length;
-        const radius = (centerX) - this.padding;
+        const radius = Math.max(centerX - this.padding, 0);
         // const jumpRadius = (radius) / this.polygonLength;
 
         // timer()
@@ -132,7 +125,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
 
         // 전체값의 몇 퍼센트는 얼마? 계산법 공식
         // 전체값 X 퍼센트 ÷ 100
-        let applyRadius = (radius * 100) / 100;
+        let applyRadius = Math.max((radius * 100) / 100, 0);
         // safe zone
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
@@ -175,7 +168,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         ctx.restore(); // 기존 드로잉 상태를 복구한다.
 
 
-        applyRadius = (radius * 85) / 100;
+        applyRadius = Math.max((radius * 85) / 100, 0);
         // none checked
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
@@ -200,7 +193,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         }
 
 
-        applyRadius = (radius * 95) / 100;
+        applyRadius = Math.max((radius * 95) / 100, 0);
         // checked
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
@@ -227,7 +220,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         }
 
 
-        applyRadius = (radius * 60) / 100;
+        applyRadius = Math.max((radius * 60) / 100, 0);
 
 
         for (let i = 0; i < this.data.length; i++) {
@@ -268,7 +261,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
 
 
 
-        applyRadius = (radius * 50) / 100;
+        applyRadius = Math.max((radius * 50) / 100, 0);
         // arrow
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
@@ -285,7 +278,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
             ctx.shadowOffsetY = 4;
             // ctx.font = '20px Arial';
             // ctx.font = ((this.width / this.data.length) - 100) + 'px Arial';
-            console.log((Math.PI / this.data.length))
+            // console.log((Math.PI / this.data.length))
             ctx.font = ((Math.PI / this.data.length) / 2 * (this.width / this.data.length)) + 'px Arial';
             ctx.textAlign = 'center';
 
@@ -314,7 +307,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
 
 
 
-        applyRadius = (radius * 40) / 100;
+        applyRadius = Math.max((radius * 40) / 100, 0);
         // margin arc
         ctx.save(); // 드로잉 상태를 저정한다.
         ctx.fillStyle = '#ffffff';

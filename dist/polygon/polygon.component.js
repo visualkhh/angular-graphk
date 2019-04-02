@@ -1,10 +1,5 @@
 import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
-var PolygonData = /** @class */ (function () {
-    function PolygonData() {
-    }
-    return PolygonData;
-}());
-export { PolygonData };
+import { PolygonData } from "./PolygonData";
 // templateUrl: './polygon.component.html',
 // styleUrls: ['./polygon.component.scss']
 // template: '<canvas #canvas></canvas>'

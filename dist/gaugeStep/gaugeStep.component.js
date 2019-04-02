@@ -1,17 +1,4 @@
 import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
-var GaugeStepData = /** @class */ (function () {
-    function GaugeStepData() {
-        this.safe = false;
-        this.safeFillStyle = 'rgba(71, 169, 203, 0.5)';
-        this.title = '';
-        this.checked = false;
-        // titleStyle = '#c3c3c3';
-        this.titleStyle = '#ffffff';
-        this.fillStyle = '#fdd30e';
-    }
-    return GaugeStepData;
-}());
-export { GaugeStepData };
 // templateUrl: './polygon.component.html',
 // styleUrls: ['./polygon.component.scss']
 // template: '<canvas #canvas></canvas>'
@@ -70,7 +57,7 @@ var GaugeStepComponent = /** @class */ (function () {
         var centerY = canvas.height / 2;
         // const startAngle = -Math.PI / 2;
         // const sides = this.data.data.length;
-        var radius = (centerX) - this.padding;
+        var radius = Math.max(centerX - this.padding, 0);
         // const jumpRadius = (radius) / this.polygonLength;
         // timer()
         // timer(1000).subscribe(() => {
@@ -97,7 +84,7 @@ var GaugeStepComponent = /** @class */ (function () {
         ctx.restore(); // 기존 드로잉 상태를 복구한다.
         // 전체값의 몇 퍼센트는 얼마? 계산법 공식
         // 전체값 X 퍼센트 ÷ 100
-        var applyRadius = (radius * 100) / 100;
+        var applyRadius = Math.max((radius * 100) / 100, 0);
         // safe zone
         for (var i = 0; i < this.data.length; i++) {
             var data = this.data[i];
@@ -137,7 +124,7 @@ var GaugeStepComponent = /** @class */ (function () {
         ctx.fill();
         ctx.stroke();
         ctx.restore(); // 기존 드로잉 상태를 복구한다.
-        applyRadius = (radius * 85) / 100;
+        applyRadius = Math.max((radius * 85) / 100, 0);
         // none checked
         for (var i = 0; i < this.data.length; i++) {
             var data = this.data[i];
@@ -160,7 +147,7 @@ var GaugeStepComponent = /** @class */ (function () {
             // ctx.stroke();
             ctx.restore(); // 기존 드로잉 상태를 복구한다.
         }
-        applyRadius = (radius * 95) / 100;
+        applyRadius = Math.max((radius * 95) / 100, 0);
         // checked
         for (var i = 0; i < this.data.length; i++) {
             var data = this.data[i];
@@ -185,7 +172,7 @@ var GaugeStepComponent = /** @class */ (function () {
             // ctx.stroke();
             ctx.restore(); // 기존 드로잉 상태를 복구한다.
         }
-        applyRadius = (radius * 60) / 100;
+        applyRadius = Math.max((radius * 60) / 100, 0);
         for (var i = 0; i < this.data.length; i++) {
             var data = this.data[i];
             ctx.save(); // 드로잉 상태를 저정한다.
@@ -220,7 +207,7 @@ var GaugeStepComponent = /** @class */ (function () {
             ctx.stroke();
             ctx.restore(); // 기존 드로잉 상태를 복구한다.
         }
-        applyRadius = (radius * 50) / 100;
+        applyRadius = Math.max((radius * 50) / 100, 0);
         // arrow
         for (var i = 0; i < this.data.length; i++) {
             var data = this.data[i];
@@ -237,7 +224,7 @@ var GaugeStepComponent = /** @class */ (function () {
             ctx.shadowOffsetY = 4;
             // ctx.font = '20px Arial';
             // ctx.font = ((this.width / this.data.length) - 100) + 'px Arial';
-            console.log((Math.PI / this.data.length));
+            // console.log((Math.PI / this.data.length))
             ctx.font = ((Math.PI / this.data.length) / 2 * (this.width / this.data.length)) + 'px Arial';
             ctx.textAlign = 'center';
             ctx.translate(centerX, canvas.height);
@@ -258,7 +245,7 @@ var GaugeStepComponent = /** @class */ (function () {
             ctx.stroke();
             ctx.restore(); // 기존 드로잉 상태를 복구한다.
         }
-        applyRadius = (radius * 40) / 100;
+        applyRadius = Math.max((radius * 40) / 100, 0);
         // margin arc
         ctx.save(); // 드로잉 상태를 저정한다.
         ctx.fillStyle = '#ffffff';

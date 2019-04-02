@@ -1,12 +1,5 @@
 import { AfterViewInit, ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-export declare class GaugeStepData {
-    safe: boolean;
-    safeFillStyle: string;
-    title: string;
-    checked: boolean;
-    titleStyle: string;
-    fillStyle: string;
-}
+import { GaugeStepData } from './GaugeStepData';
 export declare class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
     width: number;
     height: number;

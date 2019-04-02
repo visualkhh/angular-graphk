@@ -9,18 +9,9 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
+import {PolygonData} from "./PolygonData";
 
-export class PolygonData {
-    data: number[];
-    max: number;
-    // getMax(): number {
-    //     if (undefined === this.max) {
-    //         for (let i = 0; this.data && i < this.data.length; i++) {
-    //
-    //         }
-    //     }
-    // }
-}
+
 
     // templateUrl: './polygon.component.html',
     // styleUrls: ['./polygon.component.scss']
