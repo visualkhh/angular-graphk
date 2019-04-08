@@ -30,6 +30,8 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
     @Input()
     public height: number;
     @Input()
+    public fontSizePercent = 100;
+    @Input()
     public padding = 5;
     @Input()
     public data: GaugeStepData[];
@@ -221,23 +223,24 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
 
 
         applyRadius = Math.max((radius * 60) / 100, 0);
-
-
+        // text
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
             ctx.save(); // 드로잉 상태를 저정한다.
             ctx.fillStyle = data.titleStyle;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 2;
             ctx.strokeStyle = '#c3c3c3';
             ctx.shadowColor = '#999999';
-            ctx.shadowBlur = 3;
+            ctx.shadowBlur = 1;
             ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 1;
+            ctx.shadowOffsetY = 2;
             // title
             // ctx.font = '20px Arial';
             // console.log((Math.PI / this.data.length));
             // ctx.font = ((Math.PI / (this.data.length))  + (this.width / this.data.length)) + 'px Arial';
-            ctx.font = (((this.width / this.data.length)) * 20 / 100) + 'px Arial';
+            let fontSize = (((this.width / this.data.length)) * 18 / 100);
+            fontSize = (fontSize * this.fontSizePercent) / 100;
+            ctx.font = fontSize + 'px Arial';
             ctx.textAlign = 'center';
             ctx.translate(centerX, canvas.height);
 

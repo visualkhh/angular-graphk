@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {GaugeStepData} from "../graphk/gaugeStep/gaugeStep.component";
+import {GaugeStepData} from '../graphk/gaugeStep/GaugeStepData';
 
 @Component({
     selector: 'app-root',
@@ -12,14 +12,13 @@ export class AppComponent {
     h = 270;
     gaugeData: GaugeStepData[];
     constructor() {
-        const a = new GaugeStepData(); a.fillStyle = '#00ff00';  a.title = '매우낮음'; a.safe = true;  a.checked = true;
-        const b = new GaugeStepData(); b.fillStyle = '#fffc5b';  b.title = '낮음'; b.safe = true;  b.checked = false;
-        const c = new GaugeStepData(); c.fillStyle = '#a0b6ff';  c.title = '적정'; c.safe = true;  c.checked = false;
-        const d = new GaugeStepData(); d.fillStyle = '#ff2c1b';  d.title = '좋음'; d.safe = false;  d.checked = false;
-        const e = new GaugeStepData(); e.fillStyle = '#7effc0';  e.title = '높음'; e.safe = false;  e.checked = false;
-        const f = new GaugeStepData(); f.fillStyle = '#c61dff';  f.title = '매우높음'; f.safe = false;  f.checked = false;
-        // this.gaugeData = [a, b, c, d, e, f]
-        this.gaugeData = [a, b, c]
+        const a = new GaugeStepData(); a.fillStyle = '#00ff00';  a.title = '매우좌뇌편중'; a.safe = true;  a.checked = true;
+        const b = new GaugeStepData(); b.fillStyle = '#fffc5b';  b.title = '좌뇌편중'; b.safe = true;  b.checked = false;
+        const c = new GaugeStepData(); c.fillStyle = '#a0b6ff';  c.title = '균형'; c.safe = true;  c.checked = false;
+        const d = new GaugeStepData(); d.fillStyle = '#ff2c1b';  d.title = '우뇌편중'; d.safe = false;  d.checked = false;
+        const e = new GaugeStepData(); e.fillStyle = '#c61dff';  e.title = '매우우뇌편중'; e.safe = false;  e.checked = false;
+        this.gaugeData = [a, b, c, d, e]
+        // this.gaugeData = [a, b, c, d, ]
     }
 
     @HostListener('window:resize', ['$event'])

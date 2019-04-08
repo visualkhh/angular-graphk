@@ -86,7 +86,8 @@ node_module/
 
 # Generated files
 .idea/**/contentModel.xml
-
+node_modules
+node_modules/
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
