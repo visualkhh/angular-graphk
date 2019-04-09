@@ -1,6 +1,6 @@
 {
   "name": "angular-graphk",
-  "version": "1.0.8",
+  "version": "1.0.13",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

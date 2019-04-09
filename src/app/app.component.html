@@ -16,9 +16,9 @@
   <li>
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
-  <graphk-gaugeStep *ngIf='gaugeData' [width]="w" [height]="h" [data]="gaugeData"></graphk-gaugeStep>
-  <graphk-gaugeStep *ngIf='gaugeData' [width]="w" [height]="h" [data]="gaugeData.concat(gaugeData).concat(gaugeData).concat(gaugeData)"></graphk-gaugeStep>
-  <graphk-polygon [width]="w" [height]="h" [data]="{max:11, data:[1,2,3,7, 11]}"  [polygonLength]="3" >
-  </graphk-polygon>
+  <graphk-gaugeStep *ngIf='gaugeData' [fontRotate]="false" [width]="w" [height]="h" [data]="gaugeData"></graphk-gaugeStep>
+  <!--<graphk-gaugeStep *ngIf='gaugeData' [width]="w" [height]="h" [data]="gaugeData.concat(gaugeData).concat(gaugeData).concat(gaugeData)"></graphk-gaugeStep>-->
+  <!--<graphk-polygon [width]="w" [height]="h" [data]="{max:11, data:[1,2,3,7, 11]}"  [polygonLength]="3" >-->
+  <!--</graphk-polygon>-->
 </ul>
 

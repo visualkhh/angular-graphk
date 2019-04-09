@@ -32,6 +32,8 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
     @Input()
     public fontSizePercent = 100;
     @Input()
+    public fontRotate = false;
+    @Input()
     public padding = 5;
     @Input()
     public data: GaugeStepData[];
@@ -224,38 +226,87 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
 
         applyRadius = Math.max((radius * 60) / 100, 0);
         // text
+        let jumpStep = 1;
         for (let i = 0; i < this.data.length; i++) {
             const data = this.data[i];
             ctx.save(); // 드로잉 상태를 저정한다.
             ctx.fillStyle = data.titleStyle;
             ctx.lineWidth = 2;
-            ctx.strokeStyle = '#c3c3c3';
+            ctx.strokeStyle = '#7c7c7c';
             ctx.shadowColor = '#999999';
-            ctx.shadowBlur = 1;
+            ctx.shadowBlur = 2;
             ctx.shadowOffsetX = 0;
-            ctx.shadowOffsetY = 2;
+            ctx.shadowOffsetY = 1;
             // title
             // ctx.font = '20px Arial';
             // console.log((Math.PI / this.data.length));
             // ctx.font = ((Math.PI / (this.data.length))  + (this.width / this.data.length)) + 'px Arial';
-            let fontSize = (((this.width / this.data.length)) * 18 / 100);
+            let fontSize = (((this.width / this.data.length)) * 20 / 100);
             fontSize = (fontSize * this.fontSizePercent) / 100;
             ctx.font = fontSize + 'px Arial';
             ctx.textAlign = 'center';
             ctx.translate(centerX, canvas.height);
 
-            // ctx.font = ((this.width / this.data.length) - 100) + 'px Arial';
             // const rotate = ((Math.PI / this.data.length) * i);
             // let rotate = (Math.PI * 1.5) + ((Math.PI / this.data.length) * i) + ((Math.PI / this.data.length) * i) / 2;
-            const rotate = (-Math.PI / 2); // 초기각도셋팅
-            ctx.rotate(rotate);
-            ctx.rotate(((Math.PI / this.data.length) * i)); // 글자 초기각도 셋팅
-            ctx.rotate((Math.PI / this.data.length) / 2); // 글자 cneter 셋팅
             // let rotate = (Math.PI * 1.5);
-            ctx.beginPath();
+
             ctx.moveTo(0, 0);
-            ctx.strokeText(data.title, 0, -applyRadius)
-            ctx.fillText(data.title, 0, -applyRadius);
+            ctx.beginPath();
+            if (this.fontRotate) {
+                const rotate = (-Math.PI / 2); // 초기각도셋팅
+                ctx.rotate(rotate);
+                ctx.rotate(((Math.PI / this.data.length) * i)); // 글자 초기각도 셋팅
+                ctx.rotate((Math.PI / this.data.length) / 2); // 글자 cneter 셋팅
+                ctx.strokeText(data.title, 0, -applyRadius)
+                ctx.fillText(data.title, 0, -applyRadius);
+            } else {
+                // ctx.moveTo((radius * data[0]) / data.max, 0); // 다각형의 시작 위치로 이동한다.
+                // const rotate = (-Math.PI / 2); // 초기각도셋팅
+                // ctx.rotate(rotate);
+                // ctx.rotate(rotate);
+                // 다음 꼭지점까지 선을 그린다.
+                // const setRedius = (radius * data.data[i]) / data.max;
+
+                // 다음 꼭지점까지 선을 그린다.
+                // let degree = (Math.PI) / this.data.length;
+
+                // degree += (((Math.PI / this.data.length) * i)); // 글자 초기각도 셋팅
+                const degree2 = ((Math.PI / this.data.length) / 2); // 글자 cneter 셋팅
+                // const sx = applyRadius * Math.cos(degree * i);
+                // const sy = applyRadius * Math.sin(degree * i);
+                // let sx = applyRadius * Math.cos(degree * i);
+                // let sy = applyRadius * Math.sin(degree * i);
+                const ai = i + jumpStep;
+                const sx = applyRadius * Math.cos(degree2 * (ai));
+                const sy = applyRadius * Math.sin(degree2 * (ai));
+                jumpStep++;
+                // sx = sx*2;
+                // sy = sy*2;
+                // ctx.lineTo(sx, sy);
+                ctx.strokeText(data.title, -sx, -sy);
+                ctx.fillText(data.title, -sx, -sy);
+                // const setRedius = applyRadius;
+                // const degree = ((Math.PI / this.data.length) * i);
+                // // const degree = 1;
+                // const sx = setRedius * Math.cos(degree * i);
+                // const sy = setRedius * Math.sin(degree * i);
+                // ctx.fillStyle = '#000000';
+                // ctx.strokeText(data.title, sx, sy);
+
+                // ctx.strokeText('a', 0, -setRedius)
+                // ctx.fillText(data.title, sx, sy);
+                // ctx.fillText(data.title, sx, sy);
+                // ctx.fillText(data.title, -100, -100);
+                // ctx.strokeText(data.title, 0, -40)
+                // ctx.fillText(data.title, 0, -40);
+                // ctx.fill()
+                // console.log(data.title, i, ai, sx, sy);
+                // ctx.lineTo(sx, sy);
+            }
+
+
+
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
@@ -263,6 +314,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
         }
 
 
+        // return;
 
         applyRadius = Math.max((radius * 50) / 100, 0);
         // arrow
@@ -310,7 +362,7 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
 
 
 
-        applyRadius = Math.max((radius * 40) / 100, 0);
+        applyRadius = Math.max((radius * 35) / 100, 0);
         // margin arc
         ctx.save(); // 드로잉 상태를 저정한다.
         ctx.fillStyle = '#ffffff';
