@@ -231,10 +231,10 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
             const data = this.data[i];
             ctx.save(); // 드로잉 상태를 저정한다.
             ctx.fillStyle = data.titleStyle;
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = '#7c7c7c';
-            ctx.shadowColor = '#999999';
-            ctx.shadowBlur = 2;
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#858585';
+            ctx.shadowColor = '#818181';
+            ctx.shadowBlur = 1;
             ctx.shadowOffsetX = 0;
             ctx.shadowOffsetY = 1;
             // title
