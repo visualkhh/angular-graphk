@@ -231,19 +231,23 @@ export class GaugeStepComponent implements OnInit, AfterViewInit, OnChanges {
             const data = this.data[i];
             ctx.save(); // 드로잉 상태를 저정한다.
             ctx.fillStyle = data.titleStyle;
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = '#858585';
-            ctx.shadowColor = '#818181';
-            ctx.shadowBlur = 1;
-            ctx.shadowOffsetX = 0;
+            ctx.lineWidth = 0.9;
+            ctx.strokeStyle = '#4E4E4E';
+            ctx.shadowColor = '#4E4E4E';
+            ctx.shadowBlur = 0.5;
+            ctx.shadowOffsetX = 1;
             ctx.shadowOffsetY = 1;
+            // ctx.shadowColor = '#818181';
+            // ctx.shadowBlur = 1;
+            // ctx.shadowOffsetX = 0;
+            // ctx.shadowOffsetY = 1;
             // title
             // ctx.font = '20px Arial';
             // console.log((Math.PI / this.data.length));
             // ctx.font = ((Math.PI / (this.data.length))  + (this.width / this.data.length)) + 'px Arial';
-            let fontSize = (((this.width / this.data.length)) * 20 / 100);
+            let fontSize = (((this.width / this.data.length)) * 21 / 100);
             fontSize = (fontSize * this.fontSizePercent) / 100;
-            ctx.font = fontSize + 'px Arial';
+            ctx.font = 'bold '  + fontSize + 'px Arial';
             ctx.textAlign = 'center';
             ctx.translate(centerX, canvas.height);
 
